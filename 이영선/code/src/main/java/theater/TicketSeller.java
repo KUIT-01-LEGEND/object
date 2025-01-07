@@ -13,14 +13,7 @@ public class TicketSeller {
 
     public void sellTo(Audience audience) {
         Ticket ticket = ticketOffice.getTicket();
-        if (audience.getBag().hasInvitation()){
-            audience.getBag().setTicket(ticket);
-            return;
-        }
-        if (audience.getBag().hasAmount(ticket.getFee())){
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketOffice.plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
-        }
+        Long ticketPrice = audience.buy(ticket);
+        ticketOffice.plusAmount(ticketPrice);
     }
 }
