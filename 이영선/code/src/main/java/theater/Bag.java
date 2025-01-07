@@ -9,31 +9,44 @@ public class Bag {
         this.amount = amount;
     }
 
-    public boolean hasInvitation() {
+    private boolean hasInvitation() {
         return this.invitation != null;
     }
 
-    public boolean hasTicket() {
+    private boolean hasTicket() {
         return this.invitation != null;
     }
 
-    public void setTicket(Ticket ticket) {
+    private void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 
-    public void plusAmount(Long amount) {
+    private void plusAmount(Long amount) {
         this.amount += amount;
     }
 
-    public boolean hasAmount(Long amount){
+    private boolean hasAmount(Long amount){
         return this.amount > amount;
     }
 
-    public boolean minusAmount(Long amount) {
+    private boolean minusAmount(Long amount) {
         if (this.amount < amount) {
             return false;
         }
         this.amount -= amount;
         return true;
+    }
+
+    public Long hold(Ticket ticket) {
+        if (hasInvitation()) {
+            setTicket(ticket);
+            return 0L;
+        }
+        if (!hasAmount(ticket.getFee())) {
+            throw new IllegalArgumentException("손님이 돈이 없습니다.");
+        }
+        minusAmount(ticket.getFee());
+        setTicket(ticket);
+        return ticket.getFee();
     }
 }
