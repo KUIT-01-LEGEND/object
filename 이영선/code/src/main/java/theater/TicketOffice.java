@@ -13,11 +13,11 @@ public class TicketOffice {     // 매표소
         this.tickets.addAll(tickets);
     }
 
-    public Ticket getTicket(){
+    private Ticket getTicket(){
         return tickets.remove(0);
     }
 
-    public void plusAmount(Long amount) {
+    private void plusAmount(Long amount) {
         this.amount += amount;
     }
 
@@ -25,4 +25,8 @@ public class TicketOffice {     // 매표소
         this.amount -= amount;
     }
 
+    public void sellTicketTo(Audience audience) {
+        Long ticketPrice = audience.buy(getTicket());
+        plusAmount(ticketPrice);
+    }
 }
