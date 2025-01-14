@@ -24,4 +24,8 @@ public class Movie {
     public Money calculateMovieFee(Screening screening) {
         return fee.minus(discountPolicy.calculateDiscountAmount(screening));        // calculateDiscountAmount() : 할인 요금을 반환
     }
+
+    public void changeDiscountPolicy(DiscountPolicy discountPolicy){
+        this.discountPolicy = discountPolicy;
+    }
 }

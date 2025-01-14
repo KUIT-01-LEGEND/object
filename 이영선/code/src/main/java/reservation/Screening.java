@@ -25,11 +25,16 @@ public class Screening {        // 상영
         return movie.getFee();
     }
 
+    // 책임 : 영화를 예매하라.
     public Reservation reserve(Customer customer, int audienceCount) {
         return new Reservation(customer, this, calculateFee(audienceCount), audienceCount);
     }
 
+    // 영화 예매 요금을 계산하라는 책임을 Movie 객체에게 할당
     private Money calculateFee(int audienceCount) {
         return movie.calculateMovieFee(this).times(audienceCount);
+
+        // 나는 sequence와 whenScreened 변수를 파라미터로 넘기는게 좋을 것이라 생각했는데,
+        // 그렇게 넘겨버리면 Screening 객체의 캡슐화가 깨진다. (인터페이스에 이 객체가 가지고 있는 데이터가 노출됨)
     }
 }

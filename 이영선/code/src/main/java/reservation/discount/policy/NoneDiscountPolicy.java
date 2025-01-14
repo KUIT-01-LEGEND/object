@@ -2,7 +2,6 @@ package reservation.discount.policy;
 
 import reservation.Money;
 import reservation.Screening;
-import reservation.discount.condition.DiscountCondition;
 
 public class NoneDiscountPolicy extends DiscountPolicy {
     @Override
